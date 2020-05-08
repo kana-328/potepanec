@@ -59,7 +59,8 @@ Rails.application.configure do
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
-  # Use a real queuing backend for Active Job (and separate queues per environment)
+
+  # se a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "potepanec_#{Rails.env}"
 
@@ -91,4 +92,16 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-end
+
+  config.paperclip_defaults = {
+    storage: :s3,
+    preserve_files: true,
+    s3_host_name: 's3-ap-northeast-1.amazonaws.com',
+    s3_credentials: {
+      access_key_id: ENV['AKIASYVPHMA4XDDXSHGX'],
+      secret_access_key: ENV['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'],
+      s3_region: 'ap-northeast-1'
+    },
+    bucket: 'potepanec'
+}
+  end
