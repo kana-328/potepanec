@@ -48,6 +48,8 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rails-erd'
   gem 'annotate'
+  gem 'rubocop'
+  gem 'rubocop-rails'
 end
 
 group :development do
