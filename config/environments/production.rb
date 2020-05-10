@@ -96,10 +96,10 @@ Rails.application.configure do
     preserve_files: true,
     s3_host_name: 's3-ap-northeast-1.amazonaws.com',
     s3_credentials: {
-      access_key_id: ENV['AKIASYVPHMA4XDDXSHGX'],
-      secret_access_key: ENV['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'],
+      access_key_id: ENV['AKIASYVPHMA4YLENABBQ'],
+      secret_access_key: ENV['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'],
       s3_region: 'ap-northeast-1'
     },
-    bucket: 'potepanec'
+    bucket: 'potepanecnamikataec'
     }
 end
