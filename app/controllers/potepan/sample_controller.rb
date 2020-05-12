@@ -11,6 +11,10 @@ class Potepan::SampleController < ApplicationController
   def single_product
   end
 
+  def product
+    @product = Spree::Product.find(params[:id])
+  end
+
   def cart_page
   end
 

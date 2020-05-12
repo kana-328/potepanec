@@ -20,6 +20,6 @@ Rails.application.routes.draw do
     get :about_us,                  to: 'sample#about_us'
     get :tokushoho,                 to: 'sample#tokushoho'
     get :privacy_policy,            to: 'sample#privacy_policy'
-    get '/products/:id',            to: 'sample#product'
+    get 'products/:id',            to: 'sample#product'
   end
 end
