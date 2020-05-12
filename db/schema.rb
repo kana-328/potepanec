@@ -1,3 +1,4 @@
+
 ActiveRecord::Schema.define(version: 2020_01_10_032920) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -7,8 +8,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index %w[record_type record_id name blob_id],
-            name: "index_active_storage_attachments_uniqueness", unique: true
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
   create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -29,9 +29,8 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.string "scope"
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
-    t.index %w[slug sluggable_type scope],
-            name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-    t.index %w[slug sluggable_type], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
@@ -63,8 +62,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["state_id"], name: "index_spree_addresses_on_state_id"
   end
 
-  create_table "spree_adjustment_reasons", id: :integer,
-                                           options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_adjustment_reasons", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "code"
     t.boolean "active", default: true
@@ -74,8 +72,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["code"], name: "index_spree_adjustment_reasons_on_code"
   end
 
-  create_table "spree_adjustments", id: :integer,
-                                    options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_adjustments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "source_type"
     t.integer "source_id"
     t.string "adjustable_type"
@@ -90,17 +87,15 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.integer "promotion_code_id"
     t.integer "adjustment_reason_id"
     t.boolean "finalized", default: false, null: false
-    t.index %w[adjustable_id adjustable_type],
-            name: "index_spree_adjustments_on_adjustable_id_and_adjustable_type"
+    t.index ["adjustable_id", "adjustable_type"], name: "index_spree_adjustments_on_adjustable_id_and_adjustable_type"
     t.index ["adjustable_id"], name: "index_adjustments_on_order_id"
     t.index ["eligible"], name: "index_spree_adjustments_on_eligible"
     t.index ["order_id"], name: "index_spree_adjustments_on_order_id"
     t.index ["promotion_code_id"], name: "index_spree_adjustments_on_promotion_code_id"
-    t.index %w[source_id source_type], name: "index_spree_adjustments_on_source_id_and_source_type"
+    t.index ["source_id", "source_type"], name: "index_spree_adjustments_on_source_id_and_source_type"
   end
 
-  create_table "spree_assets",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_assets", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "viewable_type"
     t.integer "viewable_id"
     t.integer "attachment_width"
@@ -115,24 +110,21 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
     t.index ["viewable_id"], name: "index_assets_on_viewable_id"
-    t.index %w[viewable_type type], name: "index_assets_on_viewable_type_and_type"
+    t.index ["viewable_type", "type"], name: "index_assets_on_viewable_type_and_type"
   end
 
-  create_table "spree_calculators",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_calculators", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "type"
     t.string "calculable_type"
     t.integer "calculable_id"
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
     t.text "preferences"
-    t.index %w[calculable_id calculable_type],
-            name: "index_spree_calculators_on_calculable_id_and_calculable_type"
-    t.index %w[id type], name: "index_spree_calculators_on_id_and_type"
+    t.index ["calculable_id", "calculable_type"], name: "index_spree_calculators_on_calculable_id_and_calculable_type"
+    t.index ["id", "type"], name: "index_spree_calculators_on_id_and_type"
   end
 
-  create_table "spree_cartons",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_cartons", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "number"
     t.string "external_number"
     t.integer "stock_location_id"
@@ -149,8 +141,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["stock_location_id"], name: "index_spree_cartons_on_stock_location_id"
   end
 
-  create_table "spree_countries",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_countries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "iso_name"
     t.string "iso"
     t.string "iso3"
@@ -162,8 +153,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["iso"], name: "index_spree_countries_on_iso"
   end
 
-  create_table "spree_credit_cards",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_credit_cards", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "month"
     t.string "year"
     t.string "cc_type"
@@ -181,16 +171,14 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["user_id"], name: "index_spree_credit_cards_on_user_id"
   end
 
-  create_table "spree_customer_returns",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_customer_returns", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "number"
     t.integer "stock_location_id"
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
   end
 
-  create_table "spree_inventory_units",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_inventory_units", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "state"
     t.integer "variant_id"
     t.integer "shipment_id"
@@ -205,8 +193,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["variant_id"], name: "index_inventory_units_on_variant_id"
   end
 
-  create_table "spree_line_item_actions",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_line_item_actions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "line_item_id", null: false
     t.integer "action_id", null: false
     t.integer "quantity", default: 0
@@ -216,8 +203,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["line_item_id"], name: "index_spree_line_item_actions_on_line_item_id"
   end
 
-  create_table "spree_line_items",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_line_items", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "variant_id"
     t.integer "order_id"
     t.integer "quantity", null: false
@@ -234,26 +220,23 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["variant_id"], name: "index_spree_line_items_on_variant_id"
   end
 
-  create_table "spree_log_entries",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_log_entries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "source_type"
     t.integer "source_id"
     t.text "details"
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
-    t.index %w[source_id source_type], name: "index_spree_log_entries_on_source_id_and_source_type"
+    t.index ["source_id", "source_type"], name: "index_spree_log_entries_on_source_id_and_source_type"
   end
 
-  create_table "spree_option_type_prototypes",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_option_type_prototypes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "prototype_id"
     t.integer "option_type_id"
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
   end
 
-  create_table "spree_option_types",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_option_types", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 100
     t.string "presentation", limit: 100
     t.integer "position", default: 0, null: false
@@ -262,8 +245,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["position"], name: "index_spree_option_types_on_position"
   end
 
-  create_table "spree_option_values",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_option_values", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "position"
     t.string "name"
     t.string "presentation"
@@ -274,25 +256,22 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["position"], name: "index_spree_option_values_on_position"
   end
 
-  create_table "spree_option_values_variants",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_option_values_variants", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "variant_id"
     t.integer "option_value_id"
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
-    t.index %w[variant_id option_value_id], name: "index_option_values_variants_on_variant_id_and_option_value_id"
+    t.index ["variant_id", "option_value_id"], name: "index_option_values_variants_on_variant_id_and_option_value_id"
     t.index ["variant_id"], name: "index_spree_option_values_variants_on_variant_id"
   end
 
-  create_table "spree_order_mutexes",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_order_mutexes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "order_id", null: false
     t.datetime "created_at", precision: 6
     t.index ["order_id"], name: "index_spree_order_mutexes_on_order_id", unique: true
   end
 
-  create_table "spree_orders",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_orders", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "number", limit: 32
     t.decimal "item_total", precision: 10, scale: 2, default: "0.0", null: false
     t.decimal "total", precision: 10, scale: 2, default: "0.0", null: false
@@ -334,23 +313,21 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["guest_token"], name: "index_spree_orders_on_guest_token"
     t.index ["number"], name: "index_spree_orders_on_number"
     t.index ["ship_address_id"], name: "index_spree_orders_on_ship_address_id"
-    t.index %w[user_id created_by_id], name: "index_spree_orders_on_user_id_and_created_by_id"
+    t.index ["user_id", "created_by_id"], name: "index_spree_orders_on_user_id_and_created_by_id"
     t.index ["user_id"], name: "index_spree_orders_on_user_id"
   end
 
-  create_table "spree_orders_promotions",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_orders_promotions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "order_id"
     t.integer "promotion_id"
     t.integer "promotion_code_id"
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
-    t.index %w[order_id promotion_id], name: "index_spree_orders_promotions_on_order_id_and_promotion_id"
+    t.index ["order_id", "promotion_id"], name: "index_spree_orders_promotions_on_order_id_and_promotion_id"
     t.index ["promotion_code_id"], name: "index_spree_orders_promotions_on_promotion_code_id"
   end
 
-  create_table "spree_payment_capture_events",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_payment_capture_events", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.decimal "amount", precision: 10, scale: 2, default: "0.0"
     t.integer "payment_id"
     t.datetime "created_at", precision: 6
@@ -358,8 +335,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["payment_id"], name: "index_spree_payment_capture_events_on_payment_id"
   end
 
-  create_table "spree_payment_methods",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_payment_methods", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "type"
     t.string "name"
     t.text "description"
@@ -373,11 +349,10 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.integer "position", default: 0
     t.boolean "available_to_users", default: true
     t.boolean "available_to_admin", default: true
-    t.index %w[id type], name: "index_spree_payment_methods_on_id_and_type"
+    t.index ["id", "type"], name: "index_spree_payment_methods_on_id_and_type"
   end
 
-  create_table "spree_payments",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_payments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.decimal "amount", precision: 10, scale: 2, default: "0.0", null: false
     t.integer "order_id"
     t.string "source_type"
@@ -394,11 +369,10 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["number"], name: "index_spree_payments_on_number", unique: true
     t.index ["order_id"], name: "index_spree_payments_on_order_id"
     t.index ["payment_method_id"], name: "index_spree_payments_on_payment_method_id"
-    t.index %w[source_id source_type], name: "index_spree_payments_on_source_id_and_source_type"
+    t.index ["source_id", "source_type"], name: "index_spree_payments_on_source_id_and_source_type"
   end
 
-  create_table "spree_preferences",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_preferences", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "value"
     t.string "key"
     t.datetime "created_at", precision: 6
@@ -406,8 +380,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["key"], name: "index_spree_preferences_on_key", unique: true
   end
 
-  create_table "spree_prices",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_prices", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "variant_id", null: false
     t.decimal "amount", precision: 10, scale: 2
     t.string "currency"
@@ -416,11 +389,10 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.datetime "updated_at", precision: 6
     t.string "country_iso", limit: 2
     t.index ["country_iso"], name: "index_spree_prices_on_country_iso"
-    t.index %w[variant_id currency], name: "index_spree_prices_on_variant_id_and_currency"
+    t.index ["variant_id", "currency"], name: "index_spree_prices_on_variant_id_and_currency"
   end
 
-  create_table "spree_product_option_types",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_product_option_types", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "position"
     t.integer "product_id"
     t.integer "option_type_id"
@@ -431,8 +403,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["product_id"], name: "index_spree_product_option_types_on_product_id"
   end
 
-  create_table "spree_product_promotion_rules",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_product_promotion_rules", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "product_id"
     t.integer "promotion_rule_id"
     t.datetime "created_at", precision: 6
@@ -441,8 +412,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["promotion_rule_id"], name: "index_products_promotion_rules_on_promotion_rule_id"
   end
 
-  create_table "spree_product_properties",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_product_properties", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "value"
     t.integer "product_id"
     t.integer "property_id"
@@ -454,8 +424,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["property_id"], name: "index_spree_product_properties_on_property_id"
   end
 
-  create_table "spree_products",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_products", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.text "description"
     t.datetime "available_on"
@@ -475,8 +444,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["slug"], name: "index_spree_products_on_slug", unique: true
   end
 
-  create_table "spree_products_taxons",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_products_taxons", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "product_id"
     t.integer "taxon_id"
     t.integer "position"
@@ -487,8 +455,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["taxon_id"], name: "index_spree_products_taxons_on_taxon_id"
   end
 
-  create_table "spree_promotion_action_line_items",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_promotion_action_line_items", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "promotion_action_id"
     t.integer "variant_id"
     t.integer "quantity", default: 1
@@ -498,8 +465,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["variant_id"], name: "index_spree_promotion_action_line_items_on_variant_id"
   end
 
-  create_table "spree_promotion_actions",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_promotion_actions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "promotion_id"
     t.integer "position"
     t.string "type"
@@ -508,20 +474,18 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
     t.index ["deleted_at"], name: "index_spree_promotion_actions_on_deleted_at"
-    t.index %w[id type], name: "index_spree_promotion_actions_on_id_and_type"
+    t.index ["id", "type"], name: "index_spree_promotion_actions_on_id_and_type"
     t.index ["promotion_id"], name: "index_spree_promotion_actions_on_promotion_id"
   end
 
-  create_table "spree_promotion_categories",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_promotion_categories", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
     t.string "code"
   end
 
-  create_table "spree_promotion_code_batches",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_promotion_code_batches", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "promotion_id", null: false
     t.string "base_code", null: false
     t.integer "number_of_codes", null: false
@@ -534,8 +498,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["promotion_id"], name: "index_spree_promotion_code_batches_on_promotion_id"
   end
 
-  create_table "spree_promotion_codes",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_promotion_codes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "promotion_id", null: false
     t.string "value", null: false
     t.datetime "created_at", precision: 6
@@ -546,8 +509,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["value"], name: "index_spree_promotion_codes_on_value", unique: true
   end
 
-  create_table "spree_promotion_rule_taxons",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_promotion_rule_taxons", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "taxon_id"
     t.integer "promotion_rule_id"
     t.datetime "created_at", precision: 6
@@ -556,8 +518,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["taxon_id"], name: "index_spree_promotion_rule_taxons_on_taxon_id"
   end
 
-  create_table "spree_promotion_rules",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_promotion_rules", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "promotion_id"
     t.integer "product_group_id"
     t.string "type"
@@ -569,8 +530,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["promotion_id"], name: "index_spree_promotion_rules_on_promotion_id"
   end
 
-  create_table "spree_promotion_rules_stores",
-               options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_promotion_rules_stores", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "store_id", null: false
     t.bigint "promotion_rule_id", null: false
     t.datetime "created_at", null: false
@@ -579,8 +539,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["store_id"], name: "index_spree_promotion_rules_stores_on_store_id"
   end
 
-  create_table "spree_promotion_rules_users",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_promotion_rules_users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "promotion_rule_id"
     t.datetime "created_at", precision: 6
@@ -589,8 +548,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["user_id"], name: "index_promotion_rules_users_on_user_id"
   end
 
-  create_table "spree_promotions",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_promotions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "description"
     t.datetime "expires_at"
     t.datetime "starts_at"
@@ -608,29 +566,26 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["advertise"], name: "index_spree_promotions_on_advertise"
     t.index ["apply_automatically"], name: "index_spree_promotions_on_apply_automatically"
     t.index ["expires_at"], name: "index_spree_promotions_on_expires_at"
-    t.index %w[id type], name: "index_spree_promotions_on_id_and_type"
+    t.index ["id", "type"], name: "index_spree_promotions_on_id_and_type"
     t.index ["promotion_category_id"], name: "index_spree_promotions_on_promotion_category_id"
     t.index ["starts_at"], name: "index_spree_promotions_on_starts_at"
   end
 
-  create_table "spree_properties",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_properties", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "presentation", null: false
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
   end
 
-  create_table "spree_property_prototypes",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_property_prototypes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "prototype_id"
     t.integer "property_id"
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
   end
 
-  create_table "spree_prototype_taxons",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_prototype_taxons", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "taxon_id"
     t.integer "prototype_id"
     t.datetime "created_at", precision: 6
@@ -639,15 +594,13 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["taxon_id"], name: "index_spree_prototype_taxons_on_taxon_id"
   end
 
-  create_table "spree_prototypes",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_prototypes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
   end
 
-  create_table "spree_refund_reasons",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_refund_reasons", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.boolean "active", default: true
     t.boolean "mutable", default: true
@@ -656,8 +609,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.string "code"
   end
 
-  create_table "spree_refunds",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_refunds", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "payment_id"
     t.decimal "amount", precision: 10, scale: 2, default: "0.0", null: false
     t.string "transaction_id"
@@ -670,8 +622,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["reimbursement_id"], name: "index_spree_refunds_on_reimbursement_id"
   end
 
-  create_table "spree_reimbursement_credits",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_reimbursement_credits", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.decimal "amount", precision: 10, scale: 2, default: "0.0", null: false
     t.integer "reimbursement_id"
     t.integer "creditable_id"
@@ -680,8 +631,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.datetime "updated_at", precision: 6
   end
 
-  create_table "spree_reimbursement_types",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_reimbursement_types", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.boolean "active", default: true
     t.boolean "mutable", default: true
@@ -691,8 +641,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["type"], name: "index_spree_reimbursement_types_on_type"
   end
 
-  create_table "spree_reimbursements",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_reimbursements", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "number"
     t.string "reimbursement_status"
     t.integer "customer_return_id"
@@ -704,8 +653,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["order_id"], name: "index_spree_reimbursements_on_order_id"
   end
 
-  create_table "spree_return_authorizations",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_return_authorizations", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "number"
     t.string "state"
     t.integer "order_id"
@@ -717,8 +665,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["return_reason_id"], name: "index_return_authorizations_on_return_authorization_reason_id"
   end
 
-  create_table "spree_return_items",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_return_items", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "return_authorization_id"
     t.integer "inventory_unit_id"
     t.integer "exchange_variant_id"
@@ -741,8 +688,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["exchange_inventory_unit_id"], name: "index_spree_return_items_on_exchange_inventory_unit_id"
   end
 
-  create_table "spree_return_reasons",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_return_reasons", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.boolean "active", default: true
     t.boolean "mutable", default: true
@@ -750,27 +696,24 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.datetime "updated_at", precision: 6
   end
 
-  create_table "spree_roles",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_roles", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
     t.index ["name"], name: "index_spree_roles_on_name", unique: true
   end
 
-  create_table "spree_roles_users",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_roles_users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "role_id"
     t.integer "user_id"
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
     t.index ["role_id"], name: "index_spree_roles_users_on_role_id"
-    t.index %w[user_id role_id], name: "index_spree_roles_users_on_user_id_and_role_id", unique: true
+    t.index ["user_id", "role_id"], name: "index_spree_roles_users_on_user_id_and_role_id", unique: true
     t.index ["user_id"], name: "index_spree_roles_users_on_user_id"
   end
 
-  create_table "spree_shipments",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_shipments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "tracking"
     t.string "number"
     t.decimal "cost", precision: 10, scale: 2, default: "0.0"
@@ -791,26 +734,22 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["stock_location_id"], name: "index_spree_shipments_on_stock_location_id"
   end
 
-  create_table "spree_shipping_categories",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_shipping_categories", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
   end
 
-  create_table "spree_shipping_method_categories",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_shipping_method_categories", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "shipping_method_id", null: false
     t.integer "shipping_category_id", null: false
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
-    t.index %w[shipping_category_id shipping_method_id],
-            name: "unique_spree_shipping_method_categories", unique: true
+    t.index ["shipping_category_id", "shipping_method_id"], name: "unique_spree_shipping_method_categories", unique: true
     t.index ["shipping_method_id"], name: "index_spree_shipping_method_categories_on_shipping_method_id"
   end
 
-  create_table "spree_shipping_method_stock_locations",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_shipping_method_stock_locations", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "shipping_method_id"
     t.integer "stock_location_id"
     t.datetime "created_at", precision: 6
@@ -819,16 +758,14 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["stock_location_id"], name: "sstock_location_id_spree_sm_sl"
   end
 
-  create_table "spree_shipping_method_zones",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_shipping_method_zones", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "shipping_method_id"
     t.integer "zone_id"
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
   end
 
-  create_table "spree_shipping_methods",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_shipping_methods", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6
@@ -844,8 +781,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["tax_category_id"], name: "index_spree_shipping_methods_on_tax_category_id"
   end
 
-  create_table "spree_shipping_rate_taxes",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_shipping_rate_taxes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.decimal "amount", precision: 8, scale: 2, default: "0.0", null: false
     t.integer "tax_rate_id"
     t.integer "shipping_rate_id"
@@ -855,8 +791,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["tax_rate_id"], name: "index_spree_shipping_rate_taxes_on_tax_rate_id"
   end
 
-  create_table "spree_shipping_rates",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_shipping_rates", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "shipment_id"
     t.integer "shipping_method_id"
     t.boolean "selected", default: false
@@ -864,11 +799,10 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
     t.integer "tax_rate_id"
-    t.index %w[shipment_id shipping_method_id], name: "spree_shipping_rates_join_index", unique: true
+    t.index ["shipment_id", "shipping_method_id"], name: "spree_shipping_rates_join_index", unique: true
   end
 
-  create_table "spree_state_changes",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_state_changes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "previous_state"
     t.integer "stateful_id"
@@ -877,13 +811,11 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.string "next_state"
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
-    t.index %w[stateful_id stateful_type],
-            name: "index_spree_state_changes_on_stateful_id_and_stateful_type"
+    t.index ["stateful_id", "stateful_type"], name: "index_spree_state_changes_on_stateful_id_and_stateful_type"
     t.index ["user_id"], name: "index_spree_state_changes_on_user_id"
   end
 
-  create_table "spree_states",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_states", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "abbr"
     t.integer "country_id"
@@ -892,8 +824,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["country_id"], name: "index_spree_states_on_country_id"
   end
 
-  create_table "spree_stock_items",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_stock_items", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "stock_location_id"
     t.integer "variant_id"
     t.integer "count_on_hand", default: 0, null: false
@@ -902,12 +833,11 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.boolean "backorderable", default: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_spree_stock_items_on_deleted_at"
-    t.index %w[stock_location_id variant_id], name: "stock_item_by_loc_and_var_id"
+    t.index ["stock_location_id", "variant_id"], name: "stock_item_by_loc_and_var_id"
     t.index ["stock_location_id"], name: "index_spree_stock_items_on_stock_location_id"
   end
 
-  create_table "spree_stock_locations",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_stock_locations", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
@@ -933,8 +863,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["state_id"], name: "index_spree_stock_locations_on_state_id"
   end
 
-  create_table "spree_stock_movements",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_stock_movements", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "stock_item_id"
     t.integer "quantity", default: 0
     t.string "action"
@@ -945,15 +874,13 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["stock_item_id"], name: "index_spree_stock_movements_on_stock_item_id"
   end
 
-  create_table "spree_store_credit_categories",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_store_credit_categories", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
   end
 
-  create_table "spree_store_credit_events",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_store_credit_events", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "store_credit_id", null: false
     t.string "action", null: false
     t.decimal "amount", precision: 8, scale: 2
@@ -970,16 +897,14 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["store_credit_id"], name: "index_spree_store_credit_events_on_store_credit_id"
   end
 
-  create_table "spree_store_credit_reasons",
-               options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_store_credit_reasons", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "spree_store_credit_types",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_store_credit_types", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.integer "priority"
     t.datetime "created_at", precision: 6
@@ -987,8 +912,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["priority"], name: "index_spree_store_credit_types_on_priority"
   end
 
-  create_table "spree_store_credits",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_store_credits", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "category_id"
     t.integer "created_by_id"
@@ -1007,8 +931,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["user_id"], name: "index_spree_store_credits_on_user_id"
   end
 
-  create_table "spree_store_payment_methods",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_store_payment_methods", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "store_id", null: false
     t.integer "payment_method_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -1017,8 +940,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["store_id"], name: "index_spree_store_payment_methods_on_store_id"
   end
 
-  create_table "spree_store_shipping_methods",
-               options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_store_shipping_methods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "store_id", null: false
     t.bigint "shipping_method_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -1027,8 +949,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["store_id"], name: "index_spree_store_shipping_methods_on_store_id"
   end
 
-  create_table "spree_stores",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_stores", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "url"
     t.text "meta_description"
@@ -1046,8 +967,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["default"], name: "index_spree_stores_on_default"
   end
 
-  create_table "spree_tax_categories",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_tax_categories", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.boolean "is_default", default: false
@@ -1057,16 +977,14 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.string "tax_code"
   end
 
-  create_table "spree_tax_rate_tax_categories",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_tax_rate_tax_categories", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "tax_category_id", null: false
     t.integer "tax_rate_id", null: false
     t.index ["tax_category_id"], name: "index_spree_tax_rate_tax_categories_on_tax_category_id"
     t.index ["tax_rate_id"], name: "index_spree_tax_rate_tax_categories_on_tax_rate_id"
   end
 
-  create_table "spree_tax_rates",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_tax_rates", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.decimal "amount", precision: 8, scale: 5
     t.integer "zone_id"
     t.boolean "included_in_price", default: false
@@ -1081,8 +999,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["zone_id"], name: "index_spree_tax_rates_on_zone_id"
   end
 
-  create_table "spree_taxonomies",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_taxonomies", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
@@ -1090,8 +1007,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["position"], name: "index_spree_taxonomies_on_position"
   end
 
-  create_table "spree_taxons",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_taxons", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "parent_id"
     t.integer "position", default: 0
     t.string "name", null: false
@@ -1118,8 +1034,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["taxonomy_id"], name: "index_taxons_on_taxonomy_id"
   end
 
-  create_table "spree_unit_cancels",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_unit_cancels", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "inventory_unit_id", null: false
     t.string "reason"
     t.string "created_by"
@@ -1128,8 +1043,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["inventory_unit_id"], name: "index_spree_unit_cancels_on_inventory_unit_id"
   end
 
-  create_table "spree_user_addresses",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_user_addresses", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "address_id", null: false
     t.boolean "default", default: false
@@ -1137,13 +1051,11 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["address_id"], name: "index_spree_user_addresses_on_address_id"
-    t.index %w[user_id address_id],
-            name: "index_spree_user_addresses_on_user_id_and_address_id", unique: true
+    t.index ["user_id", "address_id"], name: "index_spree_user_addresses_on_user_id_and_address_id", unique: true
     t.index ["user_id"], name: "index_spree_user_addresses_on_user_id"
   end
 
-  create_table "spree_user_stock_locations",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_user_stock_locations", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "stock_location_id"
     t.datetime "created_at", precision: 6
@@ -1151,8 +1063,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["user_id"], name: "index_spree_user_stock_locations_on_user_id"
   end
 
-  create_table "spree_users",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "encrypted_password", limit: 128
     t.string "password_salt", limit: 128
     t.string "email"
@@ -1184,23 +1095,19 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.datetime "confirmation_sent_at"
     t.index ["deleted_at"], name: "index_spree_users_on_deleted_at"
     t.index ["email"], name: "email_idx_unique", unique: true
-    t.index ["reset_password_token"],
-            name: "index_spree_users_on_reset_password_token_solidus_auth_devise", unique: true
+    t.index ["reset_password_token"], name: "index_spree_users_on_reset_password_token_solidus_auth_devise", unique: true
     t.index ["spree_api_key"], name: "index_spree_users_on_spree_api_key"
   end
 
-  create_table "spree_variant_property_rule_conditions",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_variant_property_rule_conditions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "option_value_id"
     t.integer "variant_property_rule_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index %w[variant_property_rule_id
-               option_value_id], name: "index_spree_variant_prop_rule_conditions_on_rule_and_optval"
+    t.index ["variant_property_rule_id", "option_value_id"], name: "index_spree_variant_prop_rule_conditions_on_rule_and_optval"
   end
 
-  create_table "spree_variant_property_rule_values",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_variant_property_rule_values", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "value"
     t.integer "position", default: 0
     t.integer "property_id"
@@ -1211,16 +1118,14 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["variant_property_rule_id"], name: "index_spree_variant_property_rule_values_on_rule"
   end
 
-  create_table "spree_variant_property_rules",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_variant_property_rules", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "product_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_spree_variant_property_rules_on_product_id"
   end
 
-  create_table "spree_variants",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_variants", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "sku", default: "", null: false
     t.decimal "weight", precision: 8, scale: 2, default: "0.0"
     t.decimal "height", precision: 8, scale: 2
@@ -1243,17 +1148,14 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.index ["track_inventory"], name: "index_spree_variants_on_track_inventory"
   end
 
-  create_table "spree_wallet_payment_sources",
-               id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "spree_wallet_payment_sources", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "payment_source_type", null: false
     t.integer "payment_source_id", null: false
     t.boolean "default", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index %w[user_id payment_source_id
-               payment_source_type],
-            name: "index_spree_wallet_payment_sources_on_source_and_user", unique: true
+    t.index ["user_id", "payment_source_id", "payment_source_type"], name: "index_spree_wallet_payment_sources_on_source_and_user", unique: true
     t.index ["user_id"], name: "index_spree_wallet_payment_sources_on_user_id"
   end
 
@@ -1264,7 +1166,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_032920) do
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
     t.index ["zone_id"], name: "index_spree_zone_members_on_zone_id"
-    t.index %w[zoneable_id zoneable_type], name: "index_spree_zone_members_on_zoneable_id_and_zoneable_type"
+    t.index ["zoneable_id", "zoneable_type"], name: "index_spree_zone_members_on_zoneable_id_and_zoneable_type"
   end
 
   create_table "spree_zones", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
