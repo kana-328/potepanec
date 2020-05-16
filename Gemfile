@@ -48,6 +48,9 @@ group :development, :test do
   gem 'rails-erd'
   gem 'annotate'
   gem 'rubocop'
+  gem 'capybara', '~> 2.15.2'
+  gem 'launchy', '~>2.4.3'
+  gem 'webdrivers'
 end
 
 group :development do

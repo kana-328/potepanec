@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Potepanec</title>
+    <title> <%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
-
+    <%= render 'layouts/rails_default' %>
+    <%= render 'layouts/shim' %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
-
   <body>
+    <%= render 'layouts/header' %>
     <%= yield %>
   </body>
 </html>
