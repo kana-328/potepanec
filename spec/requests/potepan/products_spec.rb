@@ -1,6 +1,6 @@
 require 'rails_helper'
 RSpec.describe 'Potepan::Products', type: :request do
-  let!(:product) { create(:product, name: 'Tote') }
+  let!(:product) { create(:product) }
   describe 'GET /index' do
     it 'indexページに正常にアクセスされる' do
       get potepan_path
