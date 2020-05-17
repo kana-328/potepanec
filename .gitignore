@@ -12,10 +12,10 @@
 /tmp/*
 !/log/.gitkeep
 !/tmp/.gitkeep
-/.bash_profile
-/.swp
-/.zshrc
-/assets/images/
+.bash_profile
+.swp
+.zshrc
+assets/images/
 /node_modules
 /yarn-error.log
 

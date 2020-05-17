@@ -10,16 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2020_01_10_032920) do
-=======
-ActiveRecord::Schema.define(version: 2020_05_13_030540) do
->>>>>>> f993895... タイトル変更、商品名
-=======
-ActiveRecord::Schema.define(version: 2020_01_10_032920) do
->>>>>>> a2247c6... heroku画像表示されない為調節
-
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
