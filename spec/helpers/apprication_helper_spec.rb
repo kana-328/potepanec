@@ -1,14 +1,14 @@
 require 'rails_helper'
 include ApplicationHelper
 RSpec.describe ApplicationHelper, type: :helper do
-  describe '#full_title' do
-    context 'page_titleが空だったら' do
-      it 'タイトルだけ' do
+  describe 'ページタイトル' do
+    context '@product.nameがなかったら' do
+      it 'base_titleだけ' do
         expect(helper.full_title('')).to eq('BIGBAG Store')
       end
     end
-    context 'page_titleが空じゃなかったら' do
-      it 'アクションネームとタイトルが入る' do
+    context '@product.nameがあったら' do
+      it '@product.nameとbase_titleが入る' do
         expect(helper.full_title('Tote')).to eq('Tote - BIGBAG Store')
       end
     end

@@ -1,12 +1,6 @@
 require 'rails_helper'
 RSpec.describe 'Potepan::Products', type: :request do
-  let!(:product) { create(:product) }
-  describe 'GET /index' do
-    it 'indexページに正常にアクセスされる' do
-      get potepan_path
-      expect(response).to have_http_status(:success)
-    end
-  end
+  let(:product) { create(:product) }
   describe 'GET /show' do
     it 'showページに正常にアクセスされ、タイトル、料金が表示される' do
       get potepan_product_path(product.id)
