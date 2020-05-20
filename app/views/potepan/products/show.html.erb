@@ -12,7 +12,7 @@
         <div class="col-xs-6">
           <ol class="breadcrumb pull-right">
             <li>
-              <a href="/potepan">Home</a>
+              <%= link_to 'Home', potepan_path %>
             </li>
             <li class="active"><%= @product.name %></li>
           </ol>
@@ -39,11 +39,11 @@
               <div class="clearfix">
                 <div id="thumbcarousel" class="carousel slide" data-interval="false">
                   <div class="carousel-inner">
-                      <% @product.images.each do |image| %>
-                        <div data-target="#carousel" data-slide-to="0" class="thumb">
-                          <%= image_tag image.attachment(:small) %>
-                        </div>
-                      <% end %>
+                    <% @product.images.each do |image| %>
+                      <div data-target="#carousel" data-slide-to="0" class="thumb">
+                        <%= image_tag image.attachment(:small) %>
+                      </div>
+                    <% end %>
                   </div>
                   <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">
                     <span class="glyphicon glyphicon-chevron-left"></span>
@@ -57,12 +57,11 @@
             <div class="media-body">
               <ul class="list-inline">
                 <li><a href="product_grid_left_sidebar.html"><i class="fa fa-reply" aria-hidden="true"></i>一覧ページへ戻る</a></li>
-                <!-- <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i>Share This</a></li> -->
               </ul>
               <h2><%= @product.name %></h2>
               <h3><%= @product.display_price %></h3>
               <p><%= @product.description %></p>
-              <%= render 'layouts/option' %>
+              <%= render 'shared/option' %>
               <div class="btn-area">
                 <a href="cart_page.html" class="btn btn-primary btn-block">カートへ入れる<i class="fa fa-angle-right" aria-hidden="true"></i></a>
               </div>
@@ -70,7 +69,7 @@
           </div>
         </div>
       </div>
-      <%= render 'layouts/related_products' %>
+      <%= render 'shared/related_products' %>
     </div>
   </section>
 </div>
