@@ -12,10 +12,8 @@
 /tmp/*
 !/log/.gitkeep
 !/tmp/.gitkeep
-/assets/images/
 /node_modules
 /yarn-error.log
-
 .byebug_history
 /public/spree
 /vendor/*
