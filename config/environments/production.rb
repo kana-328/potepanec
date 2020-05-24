@@ -103,5 +103,5 @@ Rails.application.configure do
       s3_region: ENV['AMAZON_S3_REGION']
     },
     bucket: ENV['AMAZON_S3_BUCKET_NAME']
-    }
+  }
 end
