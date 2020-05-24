@@ -6,9 +6,12 @@ if ENV['AKIASYVPHMA4YLENABBQ']
       aws_access_key_id: ENV['AKIASYVPHMA4YLENABBQ'],
       aws_secret_access_key: ENV['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'],
           region: ENV['ap-northeast-1'],
-          host: ENV['potepanecnamikataec']
+          host: ENV['potepanecnamikataec'],
+          bucket: ENV['AMAZON_S3_BUCKET_NAME']
     },
         fog_directory: ENV["S3_BUCKET"]
+
+
   )
 
 end
