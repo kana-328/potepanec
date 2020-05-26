@@ -42,8 +42,9 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.string "scope"
       t.datetime "created_at", precision: 6
       t.datetime "updated_at", precision: 6
-      t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-      t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+      t.index %w[slug sluggable_type scope],
+              name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+      t.index %w[slug sluggable_type], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
       t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
       t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
     end
@@ -94,12 +95,13 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.integer "promotion_code_id"
       t.integer "adjustment_reason_id"
       t.boolean "finalized", default: false, null: false
-      t.index ["adjustable_id", "adjustable_type"], name: "index_spree_adjustments_on_adjustable_id_and_adjustable_type"
+      t.index %w[adjustable_id adjustable_type],
+              name: "index_spree_adjustments_on_adjustable_id_and_adjustable_type"
       t.index ["adjustable_id"], name: "index_adjustments_on_order_id"
       t.index ["eligible"], name: "index_spree_adjustments_on_eligible"
       t.index ["order_id"], name: "index_spree_adjustments_on_order_id"
       t.index ["promotion_code_id"], name: "index_spree_adjustments_on_promotion_code_id"
-      t.index ["source_id", "source_type"], name: "index_spree_adjustments_on_source_id_and_source_type"
+      t.index %w[source_id source_type], name: "index_spree_adjustments_on_source_id_and_source_type"
     end
 
     create_table "spree_assets", force: :cascade do |t|
@@ -117,7 +119,7 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.datetime "created_at", precision: 6
       t.datetime "updated_at", precision: 6
       t.index ["viewable_id"], name: "index_assets_on_viewable_id"
-      t.index ["viewable_type", "type"], name: "index_assets_on_viewable_type_and_type"
+      t.index %w[viewable_type type], name: "index_assets_on_viewable_type_and_type"
     end
 
     create_table "spree_calculators", force: :cascade do |t|
@@ -127,8 +129,9 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.datetime "created_at", precision: 6
       t.datetime "updated_at", precision: 6
       t.text "preferences"
-      t.index ["calculable_id", "calculable_type"], name: "index_spree_calculators_on_calculable_id_and_calculable_type"
-      t.index ["id", "type"], name: "index_spree_calculators_on_id_and_type"
+      t.index %w[calculable_id calculable_type],
+              name: "index_spree_calculators_on_calculable_id_and_calculable_type"
+      t.index %w[id type], name: "index_spree_calculators_on_id_and_type"
     end
 
     create_table "spree_cartons", force: :cascade do |t|
@@ -143,7 +146,8 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.datetime "updated_at", precision: 6
       t.integer "imported_from_shipment_id"
       t.index ["external_number"], name: "index_spree_cartons_on_external_number"
-      t.index ["imported_from_shipment_id"], name: "index_spree_cartons_on_imported_from_shipment_id", unique: true
+      t.index ["imported_from_shipment_id"],
+              name: "index_spree_cartons_on_imported_from_shipment_id", unique: true
       t.index ["number"], name: "index_spree_cartons_on_number", unique: true
       t.index ["stock_location_id"], name: "index_spree_cartons_on_stock_location_id"
     end
@@ -236,7 +240,7 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.text "details"
       t.datetime "created_at", precision: 6
       t.datetime "updated_at", precision: 6
-      t.index ["source_id", "source_type"], name: "index_spree_log_entries_on_source_id_and_source_type"
+      t.index %w[source_id source_type], name: "index_spree_log_entries_on_source_id_and_source_type"
     end
 
     create_table "spree_option_type_prototypes", force: :cascade do |t|
@@ -271,7 +275,8 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.integer "option_value_id"
       t.datetime "created_at", precision: 6
       t.datetime "updated_at", precision: 6
-      t.index ["variant_id", "option_value_id"], name: "index_option_values_variants_on_variant_id_and_option_value_id"
+      t.index %w[variant_id option_value_id],
+              name: "index_option_values_variants_on_variant_id_and_option_value_id"
       t.index ["variant_id"], name: "index_spree_option_values_variants_on_variant_id"
     end
 
@@ -323,7 +328,7 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.index ["guest_token"], name: "index_spree_orders_on_guest_token"
       t.index ["number"], name: "index_spree_orders_on_number"
       t.index ["ship_address_id"], name: "index_spree_orders_on_ship_address_id"
-      t.index ["user_id", "created_by_id"], name: "index_spree_orders_on_user_id_and_created_by_id"
+      t.index %w[user_id created_by_id], name: "index_spree_orders_on_user_id_and_created_by_id"
       t.index ["user_id"], name: "index_spree_orders_on_user_id"
     end
 
@@ -333,7 +338,7 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.integer "promotion_code_id"
       t.datetime "created_at", precision: 6
       t.datetime "updated_at", precision: 6
-      t.index ["order_id", "promotion_id"], name: "index_spree_orders_promotions_on_order_id_and_promotion_id"
+      t.index %w[order_id promotion_id], name: "index_spree_orders_promotions_on_order_id_and_promotion_id"
       t.index ["promotion_code_id"], name: "index_spree_orders_promotions_on_promotion_code_id"
     end
 
@@ -358,7 +363,7 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.text "preferences"
       t.string "preference_source"
       t.integer "position", default: 0
-      t.index ["id", "type"], name: "index_spree_payment_methods_on_id_and_type"
+      t.index %w[id type], name: "index_spree_payment_methods_on_id_and_type"
     end
 
     create_table "spree_payments", force: :cascade do |t|
@@ -377,7 +382,7 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.string "cvv_response_message"
       t.index ["order_id"], name: "index_spree_payments_on_order_id"
       t.index ["payment_method_id"], name: "index_spree_payments_on_payment_method_id"
-      t.index ["source_id", "source_type"], name: "index_spree_payments_on_source_id_and_source_type"
+      t.index %w[source_id source_type], name: "index_spree_payments_on_source_id_and_source_type"
     end
 
     create_table "spree_preferences", force: :cascade do |t|
@@ -398,7 +403,7 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.datetime "updated_at", precision: 6
       t.string "country_iso", limit: 2
       t.index ["country_iso"], name: "index_spree_prices_on_country_iso"
-      t.index ["variant_id", "currency"], name: "index_spree_prices_on_variant_id_and_currency"
+      t.index %w[variant_id currency], name: "index_spree_prices_on_variant_id_and_currency"
     end
 
     create_table "spree_product_option_types", force: :cascade do |t|
@@ -483,7 +488,7 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.datetime "created_at", precision: 6
       t.datetime "updated_at", precision: 6
       t.index ["deleted_at"], name: "index_spree_promotion_actions_on_deleted_at"
-      t.index ["id", "type"], name: "index_spree_promotion_actions_on_id_and_type"
+      t.index %w[id type], name: "index_spree_promotion_actions_on_id_and_type"
       t.index ["promotion_id"], name: "index_spree_promotion_actions_on_promotion_id"
     end
 
@@ -553,7 +558,7 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.index ["apply_automatically"], name: "index_spree_promotions_on_apply_automatically"
       t.index ["code"], name: "index_spree_promotions_on_code"
       t.index ["expires_at"], name: "index_spree_promotions_on_expires_at"
-      t.index ["id", "type"], name: "index_spree_promotions_on_id_and_type"
+      t.index %w[id type], name: "index_spree_promotions_on_id_and_type"
       t.index ["promotion_category_id"], name: "index_spree_promotions_on_promotion_category_id"
       t.index ["starts_at"], name: "index_spree_promotions_on_starts_at"
     end
@@ -730,7 +735,8 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.integer "shipping_category_id", null: false
       t.datetime "created_at", precision: 6
       t.datetime "updated_at", precision: 6
-      t.index ["shipping_category_id", "shipping_method_id"], name: "unique_spree_shipping_method_categories", unique: true
+      t.index %w[shipping_category_id shipping_method_id],
+              name: "unique_spree_shipping_method_categories", unique: true
       t.index ["shipping_method_id"], name: "index_spree_shipping_method_categories_on_shipping_method_id"
     end
 
@@ -784,7 +790,7 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.datetime "created_at", precision: 6
       t.datetime "updated_at", precision: 6
       t.integer "tax_rate_id"
-      t.index ["shipment_id", "shipping_method_id"], name: "spree_shipping_rates_join_index", unique: true
+      t.index %w[shipment_id shipping_method_id], name: "spree_shipping_rates_join_index", unique: true
     end
 
     create_table "spree_state_changes", force: :cascade do |t|
@@ -796,7 +802,8 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.string "next_state"
       t.datetime "created_at", precision: 6
       t.datetime "updated_at", precision: 6
-      t.index ["stateful_id", "stateful_type"], name: "index_spree_state_changes_on_stateful_id_and_stateful_type"
+      t.index %w[stateful_id stateful_type],
+              name: "index_spree_state_changes_on_stateful_id_and_stateful_type"
       t.index ["user_id"], name: "index_spree_state_changes_on_user_id"
     end
 
@@ -818,11 +825,13 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.boolean "backorderable", default: false
       t.datetime "deleted_at"
       t.index ["deleted_at"], name: "index_spree_stock_items_on_deleted_at"
-      t.index ["stock_location_id", "variant_id"], name: "stock_item_by_loc_and_var_id"
+      t.index %w[stock_location_id variant_id], name: "stock_item_by_loc_and_var_id"
       t.index ["stock_location_id"], name: "index_spree_stock_items_on_stock_location_id"
 
       if connection.supports_partial_index?
-        t.index ["variant_id", "stock_location_id"], name: "index_spree_stock_items_on_variant_id_and_stock_location_id", unique: true, where: "deleted_at is null"
+        t.index %w[variant_id stock_location_id],
+                name: "index_spree_stock_items_on_variant_id_and_stock_location_id",
+                unique: true, where: "deleted_at is null"
       end
     end
 
@@ -1020,7 +1029,7 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.datetime "created_at", null: false, precision: 6
       t.datetime "updated_at", null: false, precision: 6
       t.index ["address_id"], name: "index_spree_user_addresses_on_address_id"
-      t.index ["user_id", "address_id"], name: "index_spree_user_addresses_on_user_id_and_address_id", unique: true
+      t.index %w[user_id address_id], name: "index_spree_user_addresses_on_user_id_and_address_id", unique: true
       t.index ["user_id"], name: "index_spree_user_addresses_on_user_id"
     end
 
@@ -1037,7 +1046,8 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.integer "variant_property_rule_id"
       t.datetime "created_at", null: false, precision: 6
       t.datetime "updated_at", null: false, precision: 6
-      t.index ["variant_property_rule_id", "option_value_id"], name: "index_spree_variant_prop_rule_conditions_on_rule_and_optval"
+      t.index %w[variant_property_rule_id option_value_id],
+              name: "index_spree_variant_prop_rule_conditions_on_rule_and_optval"
     end
 
     create_table "spree_variant_property_rule_values", force: :cascade do |t|
@@ -1088,7 +1098,8 @@ class SolidusOneFour < ActiveRecord::Migration[5.0]
       t.datetime "created_at", precision: 6
       t.datetime "updated_at", precision: 6
       t.index ["zone_id"], name: "index_spree_zone_members_on_zone_id"
-      t.index ["zoneable_id", "zoneable_type"], name: "index_spree_zone_members_on_zoneable_id_and_zoneable_type"
+      t.index %w[zoneable_id zoneable_type],
+              name: "index_spree_zone_members_on_zoneable_id_and_zoneable_type"
     end
 
     create_table "spree_zones", force: :cascade do |t|

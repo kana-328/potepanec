@@ -57,7 +57,13 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  Rails.application.eager_load!
 
+  ApplicationRecord.descendants.map do |k|
+    [ k.name, k.reflect_on_all_associations.map { |a| a.class_name }].flatten
+  end.map do |models|
+    puts %(bundle exec erd --only=#{models.join(",")} --filename=tmp/#{models.first})
+  end
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
