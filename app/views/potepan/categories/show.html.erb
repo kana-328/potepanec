@@ -1,0 +1,77 @@
+<% provide(:title, "Product Grid Sidebar Left") %>
+    <div class="main-wrapper">
+      <!-- LIGHT SECTION -->
+      <section class="lightSection clearfix pageHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="page-title">
+                <h2><%= @taxon.name %></h2>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <ol class="breadcrumb pull-right">
+                <li>
+                  <%= link_to 'Home',potepan_path %>
+                </li>
+                <li>
+                  <a href="#">shop</a>
+                </li>
+                <li class="active"><%= @taxon.name %></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- MAIN CONTENT SECTION -->
+      <section class="mainContent clearfix productsContent">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3 col-sm-4 col-xs-12 sideBar">
+              <div class="panel panel-default">
+                <div class="panel-heading">商品カテゴリー</div>
+                <div class="panel-body">
+                  <div class="collapse navbar-collapse navbar-ex1-collapse navbar-side-collapse">
+                    <ul class="nav navbar-nav side-nav">
+                      <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#women">
+                          <%= Spree::Taxonomy.first.name %><i class="fa fa-plus"></i>
+                        </a>
+                        <ul id="women" class="collapse collapseItem">
+                        <%  @categories.leaves.each do |categories| %>
+                          <li><%= link_to  do %>
+                            <i class="fa fa-caret-right" aria-hidden="true"></i>
+                          <%= categories.name %><span>(<%= categories.all_products.size %>)</span>
+                          </li>
+                          <% end %>
+                          <% end %>
+                        </ul>
+                      </li>
+                      <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#men">
+                          <%= @brand.name %><i class="fa fa-plus"></i>
+                        </a>
+                        <ul id="men" class="collapse collapseItem">
+                          <%  @brand.leaves.each do |brand| %>
+                        <li><%= link_to potepan_path do %>
+                          <i class="fa fa-caret-right" aria-hidden="true"></i>
+                          <%= brand.name %>(<%= brand.all_products.size %>)
+                        </li>
+                          <% end %>
+                          <% end %>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <%= render 'shared/color_serch' %>
+            </div>
+            <div class="col-md-9 col-sm-8 col-xs-12">
+              <%= render 'shared/sort_order' %>
+              <%= render 'shared/product_list' %>
+            </div>
+          </div>
+        </div>
+      </section>
+      <%= render 'shared/high_brand' %>
