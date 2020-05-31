@@ -1,0 +1,38 @@
+<!-- MAIN CONTENT SECTION -->
+        <div class="panel panel-default">
+          <div class="panel-heading">商品カテゴリー</div>
+          <div class="panel-body">
+            <div class="collapse navbar-collapse navbar-ex1-collapse navbar-side-collapse">
+              <ul class="nav navbar-nav side-nav">
+                <li>
+                  <a href="javascript:;" data-toggle="collapse" data-target="#categories">
+                    <%= @categories.name %><i class="fa fa-plus"></i>
+                  </a>
+                  <ul id="categories" class="collapse collapseItem">
+                    <%  @categories.leaves.each do |categories| %>
+                      <li><%= link_to potepan_category_path(id: categories.id) do %>
+                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                        <%= categories.name %><span>(<%= categories.all_products.count %>)</span>
+                      </li>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                </li>
+                <li>
+                  <a href="javascript:;" data-toggle="collapse" data-target="#brand">
+                    <%= @brand.name %><i class="fa fa-plus"></i>
+                  </a>
+                  <ul id="brand" class="collapse collapseItem">
+                    <%  @brand.leaves.each do |brand| %>
+                      <li><%= link_to potepan_category_path(id: brand.id) do %>
+                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                        <%= brand.name %>(<%= brand.all_products.count %>)
+                      </li>
+                        <% end %>
+                    <% end %>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
