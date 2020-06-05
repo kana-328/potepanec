@@ -26,6 +26,7 @@ Rails.application.configure do
 
     config.cache_store = :null_store
   end
+  BetterErrors::Middleware.allow_ip! "0.0.0.0/0"
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :local
@@ -70,4 +71,5 @@ Rails.application.configure do
 
   # add white list ips under Docker
   config.web_console.whitelisted_ips = '0.0.0.0/0'
+
 end
