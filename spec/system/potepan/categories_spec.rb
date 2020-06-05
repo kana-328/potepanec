@@ -18,5 +18,4 @@ RSpec.describe 'Potepan::Categries', type: :system do
     click_on taxonomy.name
     expect(page).to have_content taxon.name
   end
-
 end
