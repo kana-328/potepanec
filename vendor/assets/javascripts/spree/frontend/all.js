@@ -5,6 +5,6 @@
 // the compiled file.
 //
 //= require jquery
-//= require rails-ujs
+//= require jquery_ujs
 //= require spree/frontend
 //= require_tree .
