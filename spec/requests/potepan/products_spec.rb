@@ -1,6 +1,6 @@
 require 'rails_helper'
 
- RSpec.describe 'Potepan::Products', type: :request do
+RSpec.describe 'Potepan::Products', type: :request do
 
   let(:taxon) { create(:taxon, id: 1) }
   let(:product) { create(:product, taxon_ids: taxon.id) }
