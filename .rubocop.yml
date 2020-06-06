@@ -48,6 +48,12 @@ Lint/SuppressedException:
 LineLength:
   Enabled: false
 
+Layout/TrailingWhitespace:
+  Enabled: false
+
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+
 MethodLength:
   Enabled: false
 

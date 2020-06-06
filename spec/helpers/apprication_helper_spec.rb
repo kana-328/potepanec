@@ -1,17 +1,23 @@
 require 'rails_helper'
+
 include ApplicationHelper
 RSpec.describe ApplicationHelper, type: :helper do
+
   describe 'ページタイトル' do
-    context 'base_titleだけが表示される場合' do
-      it '@product.nameは空である' do
+    context '@product.nameが空白の場合' do
+      it 'base_titleだけが表示される' do
         expect(helper.full_title('')).to eq('BIGBAG Store')
       end
-      it '@product.nameはnilである' do
+    end
+
+    context '@product.nameがnilの場合' do
+      it 'base_titleだけが表示される' do
         expect(helper.full_title(nil)).to eq('BIGBAG Store')
       end
     end
-    context '@product.nameとbase_titleが表示される場合' do
-      it 'page_titleに@product.nameがある' do
+
+    context '@product.nameに値が入っている場合' do
+      it 'base_titleと@product.nameが表示される' do
         expect(helper.full_title('Tote')).to eq('Tote - BIGBAG Store')
       end
     end
