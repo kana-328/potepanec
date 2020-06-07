@@ -75,6 +75,7 @@ RSpec.configure do |config|
       end
     end
   end
+  
   config.before(:each, type: :system) do
     driven_by :selenium_chorome_headless
   end

@@ -18,4 +18,9 @@ RSpec.describe 'Potepan::Categries', type: :system do
     click_on taxonomy.name
     expect(page).to have_content taxon.name
   end
+
+  it '商品名をクリックすると商品詳細ページが表示される' do
+    click_on 'tote'
+    expect(current_path).to eq potepan_product_path(product.id)
+  end
 end
