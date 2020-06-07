@@ -9,8 +9,8 @@ RSpec.describe 'Potepan::Products', type: :request do
     it 'showページに正常にアクセスされ、商品、料金が表示される' do
       get potepan_product_path(product.id)
       expect(response).to have_http_status(:success)
-      expect(response.body).to include '$19.99'
-      expect(response.body).to include 'As seen on TV!'
+      expect(response.body).to include product.display_price.to_s
+      expect(response.body).to include product.description
     end
   end
 end
