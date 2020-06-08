@@ -1,18 +1,20 @@
 <% provide(:title, @taxon.name) %>
 <div class="main-wrapper">
-  <%= render 'lite_section',taxon: @taxon %>
+  <%= render 'lite_section', taxon: @taxon %>
   <!-- MAIN CONTENT SECTION -->
   <section class="mainContent clearfix productsContent">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-4 col-xs-12 sideBar">
-          <%= render 'product_categories',taxonomies: @taxonomies %>
+          <%= render 'product_categories', taxonomies: @taxonomies %>
           <%= render 'color_serch' %>
           <%= render 'size_serch' %>
         </div>
         <div class="col-md-9 col-sm-8 col-xs-12">
           <%= render 'sort_order' %>
-          <%= render 'product_list' ,products: @products %>
+          <div>
+            <%= render partial:'product', collection: @products %>
+          </div>
         </div>
       </div>
     </div>
