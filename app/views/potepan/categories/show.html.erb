@@ -1,6 +1,6 @@
 <% provide(:title, @taxon.name) %>
 <div class="main-wrapper">
-  <%= render 'lite_section', taxon: @taxon %>
+  <%= render 'light_section', taxon: @taxon %>
   <!-- MAIN CONTENT SECTION -->
   <section class="mainContent clearfix productsContent">
     <div class="container">
@@ -13,7 +13,7 @@
         <div class="col-md-9 col-sm-8 col-xs-12">
           <%= render 'sort_order' %>
           <div class="row">
-            <%= render partial:'product', collection: @products %>
+            <%= render partial: 'product', collection: @products %>
           </div>
         </div>
       </div>
