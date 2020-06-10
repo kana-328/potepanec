@@ -60,6 +60,9 @@ MethodLength:
 ParameterLists:
   Max: 12
 
+Style/SymbolArray:
+  Enabled: false
+
 MixinUsage:
   Include:
     - app/**/*.rb

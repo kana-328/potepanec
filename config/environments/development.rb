@@ -26,6 +26,7 @@ Rails.application.configure do
 
     config.cache_store = :null_store
   end
+  BetterErrors::Middleware.allow_ip! "0.0.0.0/0"
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :local
@@ -55,6 +56,13 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet.bullet_logger = true
+    Bullet.console = true
+    Bullet.rails_logger = true
+  end
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   Rails.application.eager_load!
