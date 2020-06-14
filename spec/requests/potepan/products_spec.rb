@@ -22,13 +22,8 @@ RSpec.describe 'Potepan::Products', type: :request do
       expect(assigns(:product)).to eq product
     end
 
-    it 'showページに正常にアクセスされ、商品、料金、関連商品が表示される' do
-      get potepan_product_path(product.id)
+    it 'showページに正常にアクセスされる' do
       expect(response).to have_http_status(:success)
-      expect(response.body).to include product.display_price.to_s
-      expect(response.body).to include product.description
-      expect(response.body).to include related_products.first.name
-      expect(response.body).to_not include notrelated_product.name
     end
 
     it '関連している商品の期待する数が表示される' do
