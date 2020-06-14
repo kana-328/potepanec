@@ -5,9 +5,7 @@ RSpec.describe 'Potepan::Products', type: :request do
   let(:taxonomy) { create(:taxonomy) }
   let(:taxon) { create(:taxon, id: 1) }
   let(:product) { create(:product, taxon_ids: taxon.id) }
-  let(:other_taxon) { create(:taxon, taxonomy: taxonomy) }
   let!(:related_products) { create_list(:product, 3, name: 'testitem', taxons: [taxon]) }
-  let!(:notrelated_product) { create(:product, name: 'notrelated', taxons: [other_taxon]) }
 
   before do
     get potepan_product_path(product.id)
