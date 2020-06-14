@@ -2,7 +2,7 @@
   <div class="col-sm-4 col-xs-12">
     <div class="productBox">
       <div class="productImage clearfix">
-        <%= image_tag(product.gallery.images.first.attachment(:large)) %>
+        <%= image_tag(product.display_image.attachment(:large)) %>
       </div>
       <div class="productCaption clearfix">
         <h5><%= product.name %></h5>
