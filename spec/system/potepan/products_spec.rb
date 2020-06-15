@@ -14,10 +14,14 @@ RSpec.describe 'Potepan::Products', type: :system do
   end
 
   it '商品ページに商品詳細、料金、関連商品が表示され関連してない商品は表示されない' do
-    expect(page).to have_content product.display_price.to_s
-    expect(page).to have_content product.description
-    expect(page).to have_content related_products.name
-    expect(page).to_not have_content include notrelated_product.name
+    within(:css, '.media-body') do
+      expect(page).to have_content product.display_price.to_s
+      expect(page).to have_content product.description
+    end
+    within(:css, '.productCaption') do
+      expect(page).to have_content related_products.name
+      expect(page).to_not have_content include notrelated_product.name
+    end
   end
 
   it '一覧ページへ戻るを押すとカテゴリー別商品一覧ページが表示される' do
