@@ -4,5 +4,6 @@ class Potepan::ProductsController < ApplicationController
     @product = Spree::Product.find(params[:id])
     @related_products = Spree::Product.add_price_image.joins(:taxons, :classifications)
                                       .distinct.related_products(@product).without_self(@product).sample(RELATED_PRODUCTS_LIMIT)
+
   end
 end
