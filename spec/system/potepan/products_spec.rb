@@ -5,7 +5,7 @@ RSpec.describe 'Potepan::Products', type: :system do
   let(:taxon) { create(:taxon, taxonomy: taxonomy) }
   let(:product) { create(:product, taxons: [taxon]) }
   let(:other_taxon) { create(:taxon, taxonomy: taxonomy) }
-  let!(:related_products) { create(:product, name: 'testitem', taxons: [taxon]) }
+  let!(:related_product) { create(:product, name: 'testitem', taxons: [taxon]) }
   let!(:notrelated_product) { create(:product, name: 'notrelated', taxons: [other_taxon]) }
 
   before do
@@ -19,8 +19,8 @@ RSpec.describe 'Potepan::Products', type: :system do
       expect(page).to have_content product.description
     end
     within(:css, '.productCaption') do
-      expect(page).to have_content related_products.name
-      expect(page).to_not have_content include notrelated_product.name
+      expect(page).to have_content related_product.name
+      expect(page).to_not have_content notrelated_product.name
     end
   end
 
@@ -30,7 +30,7 @@ RSpec.describe 'Potepan::Products', type: :system do
   end
 
   it '関連商品をクリックすると商品詳細ページが表示される' do
-    click_on related_products.name
-    expect(current_path).to eq potepan_product_path(related_products.id)
+    click_on related_product.name
+    expect(current_path).to eq potepan_product_path(related_product.id)
   end
 end

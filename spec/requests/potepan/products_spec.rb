@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe 'Potepan::Products', type: :request do
 
   let(:taxonomy) { create(:taxonomy) }
-  let(:taxon) { create(:taxon, id: 1) }
+  let(:taxon) { create(:taxon) }
   let(:product) { create(:product, taxon_ids: taxon.id) }
-  let!(:related_products) { create_list(:product, 3, name: 'testitem', taxons: [taxon]) }
+  let!(:related_products) { create_list(:product, 5, name: 'testitem', taxons: [taxon]) }
 
   before do
     get potepan_product_path(product.id)
@@ -25,7 +25,7 @@ RSpec.describe 'Potepan::Products', type: :request do
     end
 
     it '関連している商品の期待する数が表示される' do
-      expect(related_products.size).to eq 3
+      expect(assigns(:related_products).size).to eq 4
     end
   end
 end
