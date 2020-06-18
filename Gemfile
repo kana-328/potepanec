@@ -35,6 +35,7 @@ group :development, :test do
   gem 'launchy', '~>2.4.3'
   gem 'webdrivers'
   gem 'rails-controller-testing'
+  gem 'httpclient'
 end
 
 group :development do
