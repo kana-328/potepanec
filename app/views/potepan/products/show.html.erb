@@ -5,14 +5,14 @@
   <section class="mainContent clearfix">
     <div class="container">
       <%= render 'main_product', product: @product %>
-      <div class="row productsContent">
-        <div class="col-xs-12">
-          <div class="page-header">
-            <h4>関連商品</h4>
-          </div>
+    <div class="row productsContent">
+      <div class="col-xs-12">
+        <div class="page-header">
+          <h4>関連商品</h4>
         </div>
-        <%= render partial: 'related_product', collection: @related_products %>
       </div>
+      <%= render partial: 'related_product', collection: @related_products %>
+    </div>
     </div>
   </section>
 </div>
