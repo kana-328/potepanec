@@ -63,6 +63,9 @@ ParameterLists:
 Style/SymbolArray:
   Enabled: false
 
+Metrics/BlockLength:
+  Enabled: false
+  
 MixinUsage:
   Include:
     - app/**/*.rb
