@@ -1,6 +1,5 @@
 require 'rails_helper'
 RSpec.describe 'Potepan::Categries', type: :system do
-
   let(:taxonomy) { create(:taxonomy, name: 'Categries') }
   let(:product) { create(:product, name: 'tote', taxon_ids: taxon.id) }
   let(:taxon) { create(:taxon, name: 'Bag', taxonomy_id: taxonomy, parent_id: taxonomy) }

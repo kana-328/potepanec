@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Potepan::Products', type: :request do
-
   let(:taxonomy) { create(:taxonomy) }
   let(:taxon) { create(:taxon) }
   let(:product) { create(:product, taxon_ids: taxon.id) }
@@ -10,8 +9,8 @@ RSpec.describe 'Potepan::Products', type: :request do
   before do
     get potepan_product_path(product.id)
   end
-  describe 'GET /show' do
 
+  describe 'GET /show' do
     it 'リクエストが成功すること' do
       expect(response.status).to eq 200
     end

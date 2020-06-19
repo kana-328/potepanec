@@ -1,6 +1,5 @@
 require 'rails_helper'
 RSpec.describe 'Potepan::Products', type: :request do
-
   let(:taxonomy) { create(:taxonomy, name: 'Categries') }
   let(:product) { create(:product, name: 'tote', taxon_ids: taxon.id) }
   let(:taxon) { create(:taxon, name: 'Bag', taxonomy_id: taxonomy, parent_id: taxonomy) }
@@ -25,7 +24,7 @@ RSpec.describe 'Potepan::Products', type: :request do
 
   it '他のカテゴリー商品は表示されていない' do
     expect(response.body).to include product.name
-    expect(response.body).to_not include other_product.name
-    expect(response.body).to_not include other_taxon.name
+    expect(response.body).not_to include other_product.name
+    expect(response.body).not_to include other_taxon.name
   end
 end
