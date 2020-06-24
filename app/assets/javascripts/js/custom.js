@@ -1,5 +1,21 @@
 //============================== header =========================
 
+  $('#input').on("input", function(){
+      var input = $('#input').val();
+    $.ajax({
+      type: 'GET',
+      url: '/potepan/suggests',
+      data: { keyword: input },
+      dataType: 'json',
+      })
+      .done(function (data){
+        console.log('hello')
+      })
+      .fail(function(){
+        console.log('foobar')
+      })
+    });
+
 jQuery(document).ready(function($) {
 
     var navbar = $('.navbar-main'),
