@@ -1,16 +1,18 @@
 require 'httpclient'
+require 'json'
 class Potepan::SuggestsController < ApplicationController
   def search
-    client = HTTPClient.new()
     url = ENV['API_SUGGEST_URL']
-    query = {'keyword' => params[:keyword] }
     apikey = ENV['API_KEY']
-    res = client.get(url, query, )
+    query = { "keyword" => params[:keyword], "max_num" => params[:max_num] }
+    res = httpclient.get( url, query, Authorization: apikey)
     @res = res.body
       respond_to do |format|
-        format.html { redirect_to request.referrer || root_url}
-        format.json { render :json => @res }
-        format.xml  { render :xml => @res }
+        format.json { render json: @res }
       end
+  end
+
+  def httpclient
+    client = HTTPClient.new()
   end
 end

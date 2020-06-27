@@ -1,20 +1,22 @@
 //============================== header =========================
 
-  $('#input').on("input", function(){
-      var input = $('#input').val();
+$("#input").autocomplete({
+	source: function( request, response){
+		var keyword = $('#input').val();
     $.ajax({
       type: 'GET',
       url: '/potepan/suggests',
-      data: { keyword: input },
-      dataType: 'json',
-      })
+			contentType: 'application/json',
+			data:{ keyword: keyword, max_num: 5 },
+    })
       .done(function (data){
-        console.log('hello')
-      })
-      .fail(function(){
-        console.log('foobar')
-      })
-    });
+				response(data);
+			})
+      .fail(function(XMLHttpRequest, textStatus, errorThrowm){
+        response('');
+			})
+	}
+});
 
 jQuery(document).ready(function($) {
 
@@ -38,14 +40,23 @@ jQuery(document).ready(function($) {
 });
 
 //============================== ALL DROPDOWN ON HOVER =========================
-jQuery(document).ready(function(){
-    $('.dropdown').hover(function() {
-        $(this).addClass('open');
-    },
-    function() {
-        $(this).removeClass('open');
-    });
-});
+
+	jQuery(document).ready(function(){
+		$('.dropdown').hover(function() {
+			$(this).addClass('open');
+			},
+		);
+	});
+		
+	jQuery(document).ready(function(){
+		$('.ui-autocomplete-input').hover(function() {
+		$(this).addClass('open');
+		},
+		function() {
+		$(this).removeClass('open');
+		});
+	});
+
 //============================== RS-SLIDER =========================
 jQuery(document).ready(function() {
 	  jQuery('.fullscreenbanner').revolution({
