@@ -36,6 +36,7 @@ group :development, :test do
   gem 'launchy', '~>2.4.3'
   gem 'webdrivers'
   gem 'rails-controller-testing'
+  gem 'webmock'
 end
 
 group :development do
