@@ -1,6 +1,9 @@
 inherit_from:
   - .rubocop_airbnb.yml
 
+Metrics/LineLength:
+  Enabled: false
+
 AllCops:
   Exclude:
     - bin/*

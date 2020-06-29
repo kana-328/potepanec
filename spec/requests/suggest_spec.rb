@@ -1,27 +1,29 @@
 require 'rails_helper'
 require 'httpclient'
-require 'webmock'
-include WebMock::API
-WebMock.enable!
 RSpec.describe 'Potepan::Suggests', type: :request do
+  WebMock.allow_net_connect!
 
-before do
-  stub_request(:any, ENV['API_SUGGEST_URL']).to_return(
-    :status => 200,
-    :headers => {"keyword": "r", "max_num": 5},
-    :body => 'ruby'
-  )
-  http = HTTPClient.new
-  response = http.get ENV['API_SUGGEST_URL']
-end
+  client = HTTPClient.new
+  uri = ENV['API_SUGGEST_URL']
+  headers = { "Authorization": ENV['API_KEY'], "Content-Type": "application/json" }
 
-  it '200 0Kを返す' do
+  it "正常なresponseの場合200レスポンスが返ってくる" do
+    query = { "keyword": "r", "max_num": 5 }
+    response = client.get(uri, query, headers)
     expect(response.status).to eq 200
+    expect(response.reason).to eq 'OK'
   end
 
-  it '成功時のJSONレスポンスを返す' do 
+  it "responseに期待するbodyの配列が入っている" do
+    query = { "keyword": "r", "max_num": 5 }
+    response = client.get(uri, query, headers)
+    expect(JSON.parse(response.body)).to eq ["ruby", "ruby for women", "ruby for men", "rails", "rails for women"]
   end
 
-  it '500レスポンスを返す' do
+  it "エラーの際500レスポンスが返ってきてメッセージが表示される" do
+    query = { "max_num": 5 }
+    response = client.get(uri, query, headers)
+    expect(response.status).to eq 500
+    expect(response.reason).to eq 'Internal Server Error'
   end
 end

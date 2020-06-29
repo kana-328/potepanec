@@ -12,8 +12,8 @@ $("#input").autocomplete({
       .done(function (data){
 				response(data);
 			})
-      .fail(function(XMLHttpRequest, textStatus, errorThrowm){
-        response('');
+      .fail(function (XMLHttpRequest, textStatus, errorThrowm){
+        response("");
 			})
 	}
 });
