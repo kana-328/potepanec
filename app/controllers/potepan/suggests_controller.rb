@@ -1,14 +1,10 @@
-require 'httpclient'
-require 'json'
 class Potepan::SuggestsController < ApplicationController
   def search
     url = ENV['API_SUGGEST_URL']
-    apikey = ENV['API_KEY']
-    headers = { Authorization: apikey }
     query = { "keyword": params[:keyword], "max_num" => params[:max_num] }
-    res = httpclient.get(url, query, headers)
-    @response = res.body
-    @status = res.status
+    response = HTTPClient.get(url, query, headers)
+    @response = response.body
+    @status = response.status
     respond_to do |format|
       if @status == 200
         format.json { render json: @response }
