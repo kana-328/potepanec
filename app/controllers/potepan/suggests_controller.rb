@@ -2,6 +2,7 @@ class Potepan::SuggestsController < ApplicationController
   def search
     url = ENV['API_SUGGEST_URL']
     query = { "keyword": params[:keyword], "max_num" => params[:max_num] }
+    headers = { Authorization: "Bearer #{ENV['API_KEY']}", "Content-Type": "application/json" }
     response = HTTPClient.get(url, query, headers)
     @response = response.body
     @status = response.status

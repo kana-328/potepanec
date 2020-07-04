@@ -44,8 +44,7 @@ jQuery(document).ready(function($) {
 	jQuery(document).ready(function(){
 		$('.dropdown').hover(function() {
 			$(this).addClass('open');
-			},
-		);
+			});
 	});
 		
 	jQuery(document).ready(function(){
