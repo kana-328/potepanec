@@ -1,22 +1,18 @@
 class Potepan::SuggestsController < ApplicationController
-  def search
+  require "./lib/client/api_request"
+  # include Client
+  def show
     url = ENV['API_SUGGEST_URL']
-    query = { "keyword": params[:keyword], "max_num" => params[:max_num] }
+    query = { keyword: params[:keyword], max_num: 5 }
     headers = { Authorization: "Bearer #{ENV['API_KEY']}", "Content-Type": "application/json" }
-    response = HTTPClient.get(url, query, headers)
-    @response = response.body
-    @status = response.status
-    respond_to do |format|
-      if @status == 200
-        format.json { render json: @response }
-        format.js
-      else
-        format.json do
-          render json: {
-            error: "必要なパラメーターが不足しています。管理者に確認してください。",
-          }, status: 500
-        end
-      end
+    response = Client::ApiRequest.suggest(url, query, headers)
+    status = response.status
+    if status == 200
+      render json: response.body
+    else
+      render json: {
+        error: "エラーが発生しています。管理者に確認してください。",
+      }, status: 500
     end
   end
 end

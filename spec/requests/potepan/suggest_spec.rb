@@ -18,10 +18,8 @@ RSpec.describe 'Potepan::Suggests', type: :request do
     end
 
     it 'status:200がレスポンスで返ってきてbodyに期待する値が入っている' do
-      query = { "keyword": "r", "max_num": 5 }
-      uri = ENV['API_SUGGEST_URL']
-      headers = { "Authorization": "Bearer #{ENV['API_KEY']}", "Content-Type": "application/json" }
-      response = HTTPClient.get(uri, query, headers)
+      get potepan_suggests_path params: { keyword: "r", max_num: 5 }
+      expect(response).to be_success
       expect(response.status).to eq 200
       expect(JSON.parse(response.body)).to eq ["ruby", "ruby for women", "ruby for men", "rails", "rails for women"]
     end
@@ -32,8 +30,8 @@ RSpec.describe 'Potepan::Suggests', type: :request do
       WebMock.enable!
       WebMock.stub_request(:get, ENV['API_SUGGEST_URL']).
         with(
-          headers: { "Authorization": "Bearer #{ENV['API_KEY']}", "Content-Type": "application/json" },
-          query: { "max_num": 5 }
+          headers: { "Content-Type": "application/json" },
+          query: { "keyword": "r", "max_num": 5 }
         ).to_return(
           headers: { "Content-Type": "application/json" },
           status: 500,
@@ -42,10 +40,8 @@ RSpec.describe 'Potepan::Suggests', type: :request do
     end
 
     it "status:500がレスポンスで返ってくる" do
-      query = { "max_num": 5 }
-      uri = ENV['API_SUGGEST_URL']
-      headers = { "Authorization": "Bearer #{ENV['API_KEY']}", "Content-Type": "application/json" }
-      response = HTTPClient.get(uri, query, headers)
+      get potepan_suggests_path params: { keyword: "r", max_num: 5 }
+      expect(response).not_to be_success
       expect(response.status).to eq 500
     end
   end
