@@ -57,7 +57,6 @@ module Potepanec
     config.generators.stylesheets    = false
     config.generators.javascripts    = false
     config.generators.helper         = false
-   # config.paths.add 'lib', eager_load: true
    config.autoload_paths += %W(#{config.root}/lib)
   end
 end

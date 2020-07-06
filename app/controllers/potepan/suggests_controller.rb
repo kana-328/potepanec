@@ -1,6 +1,5 @@
 class Potepan::SuggestsController < ApplicationController
   require "./lib/client/api_request"
-  # include Client
   def show
     url = ENV['API_SUGGEST_URL']
     query = { keyword: params[:keyword], max_num: 5 }
