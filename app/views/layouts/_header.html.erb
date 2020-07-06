@@ -25,12 +25,12 @@
               <% end %>
               <ul class="dropdown-menu dropdown-menu-right">
                 <li>
-                <%= form_tag({controller: "suggests",action: "show"}, method: "post",id: "form01", remote: true) do %>
-                  <span class="input-group">
+                  <%= form_tag({controller: "suggests",action: "show"}, method: "post",id: "form01", remote: true) do %>
+                    <span class="input-group">
                       <%= text_field_tag(:keyword, "",{ id: "input", class: "form-control get_suggest ui-autocomplete-input", "placeholder": "Search…", "aria-describedby": "basic-addon2",autocomplete: 'off'}) %>
-                    <span onclick="FormSubmit();"class="input-group-addon addPointer" id="basic-addon2">検索</span>
-                  </span>
-                <% end %>
+                      <span onclick="FormSubmit();"class="input-group-addon addPointer" id="basic-addon2">検索</span>
+                    </span>
+                  <% end %>
                 </li>
               </ul>
             </li>
