@@ -10,7 +10,7 @@ class Potepan::SuggestsController < ApplicationController
       render json: response.body
     else
       render json: {
-        error: "エラーが発生しています。管理者に確認してください。",
+        error: "エラーが発生しています。管理者に確認してください",
       }, status: 500
     end
   end
