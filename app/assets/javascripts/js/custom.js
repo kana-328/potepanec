@@ -184,7 +184,7 @@ jQuery(document).ready(function() {
 function FormSubmit() {
   var target = document.getElementById("form01");
   target.method = "post";
-  target.submit(); 
+  target.submit();
 };
 
 
