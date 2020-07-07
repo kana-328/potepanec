@@ -9,56 +9,55 @@ $("#input").autocomplete({
       contentType: 'application/json',
       data:{ keyword: keyword, max_num: 5 },
     })
-      .done(function (data){
-        response(data);
-      })
-      .fail(function (XMLHttpRequest, textStatus, errorThrowm){
-        response("");
-      })
+    .done(function (data){
+      response(data);
+    })
+    .fail(function (XMLHttpRequest, textStatus, errorThrowm){
+      response("");
+    })
   }
 });
 
 jQuery(document).ready(function($) {
 
-    var navbar = $('.navbar-main'),
-        distance = navbar.offset().top,
-        $window = $(window);
+  var navbar = $('.navbar-main'),
+    distance = navbar.offset().top,
+    $window = $(window);
 
-      $window.scroll(function() {
-        if(($window.scrollTop() >= distance) && ($(".navbar-default").hasClass("navbar-main")))
-          {
-              navbar.removeClass('navbar-fixed-top').addClass('navbar-fixed-top');
-              $("body").addClass("padding-top");
-              $(".topBar").css("display","none");
-          } else {
-              navbar.removeClass('navbar-fixed-top');
-              $("body").removeClass("padding-top");
-              $(".topBar").css("display","block");
-          }
-      });
-
+  $window.scroll(function() {
+    if(($window.scrollTop() >= distance) && ($(".navbar-default").hasClass("navbar-main")))
+    {
+      navbar.removeClass('navbar-fixed-top').addClass('navbar-fixed-top');
+      $("body").addClass("padding-top");
+      $(".topBar").css("display","none");
+    } else {
+      navbar.removeClass('navbar-fixed-top');
+      $("body").removeClass("padding-top");
+      $(".topBar").css("display","block");
+    }
+  });
 });
 
 //============================== ALL DROPDOWN ON HOVER =========================
 
-  jQuery(document).ready(function(){
-    $('.dropdown').hover(function() {
-      $(this).addClass('open');
-      });
-  });
-
-  jQuery(document).ready(function(){
-    $('.ui-autocomplete-input').hover(function() {
+jQuery(document).ready(function(){
+  $('.dropdown').hover(function() {
     $(this).addClass('open');
-    },
-    function() {
-    $(this).removeClass('open');
-    });
   });
+});
+
+jQuery(document).ready(function(){
+  $('.ui-autocomplete-input').hover(function() {
+    $(this).addClass('open');
+  },
+  function() {
+    $(this).removeClass('open');
+  });
+});
 
 //============================== RS-SLIDER =========================
 jQuery(document).ready(function() {
-    jQuery('.fullscreenbanner').revolution({
+  jQuery('.fullscreenbanner').revolution({
     delay: 5000,
     startwidth: 1170,
     startheight: 500,
@@ -75,51 +74,51 @@ jQuery(document).ready(function() {
 //============================== OWL-CAROUSEL =========================
 jQuery(document).ready(function() {
   var owl = $('.owl-carousel.featuredProductsSlider');
-    owl.owlCarousel({
-      loop:true,
-      margin:28,
-      autoplay:true,
-      autoplayTimeout:2000,
-      autoplayHoverPause:true,
-      nav:true,
-      moveSlides: 4,
-      dots: false,
-      responsive:{
-        320:{
-          items:1
-        },
-        768:{
-          items:3
-        },
-        992:{
-          items:4
-        }
+  owl.owlCarousel({
+    loop:true,
+    margin:28,
+    autoplay:true,
+    autoplayTimeout:2000,
+    autoplayHoverPause:true,
+    nav:true,
+    moveSlides: 4,
+    dots: false,
+    responsive:{
+      320:{
+        items:1
+      },
+      768:{
+        items:3
+      },
+      992:{
+        items:4
       }
-    });
+    }
+  });
   var owl = $('.owl-carousel.partnersLogoSlider');
-    owl.owlCarousel({
-      loop:true,
-      margin:28,
-      autoplay:true,
-      autoplayTimeout:6000,
-      autoplayHoverPause:true,
-      nav:true,
-      dots: false,
-      responsive:{
-        320:{
-          slideBy: 1,
-          items:1
-        },
-        768:{
-          slideBy: 3,
-          items:3
-        },
-        992:{
-          slideBy: 5,
-          items:5
-        }
+  owl.owlCarousel({
+    loop:true,
+    margin:28,
+    autoplay:true,
+    autoplayTimeout:6000,
+    autoplayHoverPause:true,
+    nav:true,
+    dots: false,
+    responsive:{
+      320:{
+        slideBy: 1,
+        items:1
+      },
+      768:{
+        slideBy: 3,
+        items:3
+      },
+      992:{
+        slideBy: 5,
+        items:5
       }
-    });
+    }
+  });
 });
 //============================== SELECT BOX =========================
 jQuery(document).ready(function() {
@@ -179,79 +178,78 @@ jQuery(document).ready(function() {
 
 jQuery(document).ready(function() {
   $(".quick-view .btn-block").click(function(){
-        $(".quick-view").modal("hide");
-    });
+    $(".quick-view").modal("hide");
+  });
 });
 function FormSubmit() {
-    var target = document.getElementById("form01");
-    target.method = "post";
-    target.submit();
-  };
+  var target = document.getElementById("form01");
+  target.method = "post";
+  target.submit(); 
+};
 
 
 //============================== FOOTER COPYRIGHT =========================
 
 // コンテンツが少ない時にfooterをbottom:0にする footerFixed.js
-  new function(){
+new function(){
 
-    var footerId = "footer";
-    //メイン
-    function footerFixed(){
-      //ドキュメントの高さ
-      var dh = document.getElementsByTagName("body")[0].clientHeight;
-      //フッターのtopからの位置
-      document.getElementById(footerId).style.top = "0px";
-      var ft = document.getElementById(footerId).offsetTop;
-      //フッターの高さ
-      var fh = document.getElementById(footerId).offsetHeight;
-      //ウィンドウの高さ
-      if (window.innerHeight){
-        var wh = window.innerHeight;
-      }else if(document.documentElement && document.documentElement.clientHeight != 0){
-        var wh = document.documentElement.clientHeight;
-      }
-      if(ft+fh<wh){
-        document.getElementById(footerId).style.position = "relative";
-        document.getElementById(footerId).style.top = (wh-fh-ft-1)+"px";
-      }
+  var footerId = "footer";
+  //メイン
+  function footerFixed(){
+    //ドキュメントの高さ
+    var dh = document.getElementsByTagName("body")[0].clientHeight;
+    //フッターのtopからの位置
+    document.getElementById(footerId).style.top = "0px";
+    var ft = document.getElementById(footerId).offsetTop;
+    //フッターの高さ
+    var fh = document.getElementById(footerId).offsetHeight;
+    //ウィンドウの高さ
+    if (window.innerHeight){
+      var wh = window.innerHeight;
+    }else if(document.documentElement && document.documentElement.clientHeight != 0){
+      var wh = document.documentElement.clientHeight;
     }
+    if(ft+fh<wh){
+      document.getElementById(footerId).style.position = "relative";
+      document.getElementById(footerId).style.top = (wh-fh-ft-1)+"px";
+    }
+  }
 
     //文字サイズ
-    function checkFontSize(func){
+function checkFontSize(func){
 
-      //判定要素の追加
-      var e = document.createElement("div");
-      var s = document.createTextNode("S");
-      e.appendChild(s);
-      e.style.visibility="hidden"
-      e.style.position="absolute"
-      e.style.top="0"
-      document.body.appendChild(e);
-      var defHeight = e.offsetHeight;
+  //判定要素の追加
+  var e = document.createElement("div");
+  var s = document.createTextNode("S");
+  e.appendChild(s);
+  e.style.visibility="hidden"
+  e.style.position="absolute"
+  e.style.top="0"
+  document.body.appendChild(e);
+  var defHeight = e.offsetHeight;
 
-      //判定関数
-      function checkBoxSize(){
-        if(defHeight != e.offsetHeight){
-          func();
-          defHeight= e.offsetHeight;
-        }
-      }
-      setInterval(checkBoxSize,1000)
+  //判定関数
+  function checkBoxSize(){
+    if(defHeight != e.offsetHeight){
+      func();
+      defHeight= e.offsetHeight;
     }
-
-    //イベントリスナー
-    function addEvent(elm,listener,fn){
-      try{
-        elm.addEventListener(listener,fn,false);
-      }catch(e){
-        elm.attachEvent("on"+listener,fn);
-      }
-    }
-
-    addEvent(window,"load",footerFixed);
-    addEvent(window,"load",function(){
-      checkFontSize(footerFixed);
-    });
-    addEvent(window,"resize",footerFixed);
-
   }
+  setInterval(checkBoxSize,1000)
+}
+
+//イベントリスナー
+function addEvent(elm,listener,fn){
+  try{
+    elm.addEventListener(listener,fn,false);
+  }catch(e){
+    elm.attachEvent("on"+listener,fn);
+  }
+}
+
+addEvent(window,"load",footerFixed);
+addEvent(window,"load",function(){
+  checkFontSize(footerFixed);
+});
+addEvent(window,"resize",footerFixed);
+}

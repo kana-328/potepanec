@@ -1,12 +1,10 @@
 class Potepan::SuggestsController < ApplicationController
   require "./lib/client/api_request"
   def show
-    url = ENV['API_SUGGEST_URL']
-    query = { keyword: params[:keyword], max_num: 5 }
-    headers = { Authorization: "Bearer #{ENV['API_KEY']}", "Content-Type": "application/json" }
-    response = Client::ApiRequest.suggest(url, query, headers)
+    response = Client::ApiRequest.suggest(params[:keyword], params[:max_num])
     status = response.status
     if status == 200
+      logger.debug { "response: #{response.inspect}" }
       render json: response.body
     else
       render json: {
