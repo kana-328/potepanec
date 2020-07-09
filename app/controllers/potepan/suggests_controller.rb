@@ -5,10 +5,11 @@ class Potepan::SuggestsController < ApplicationController
     if response.status == 200
       render json: response.body
     else
+      logger.error { "response: #{response.inspect}" }
       render json: {
         error: "エラーが発生しています。管理者に確認してください",
       }, status: 500
-      logger.error { "response: #{response.inspect}" }
+      
     end
   end
 end

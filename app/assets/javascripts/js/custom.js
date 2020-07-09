@@ -25,8 +25,7 @@ jQuery(document).ready(function($) {
     $window = $(window);
 
   $window.scroll(function() {
-    if(($window.scrollTop() >= distance) && ($(".navbar-default").hasClass("navbar-main")))
-    {
+    if(($window.scrollTop() >= distance) && ($(".navbar-default").hasClass("navbar-main"))){
       navbar.removeClass('navbar-fixed-top').addClass('navbar-fixed-top');
       $("body").addClass("padding-top");
       $(".topBar").css("display","none");
@@ -137,19 +136,19 @@ jQuery(document).ready(function() {
   var minimum = 2000;
   var maximum = 30000;
 
-  $( "#price-range" ).slider({
+  $("#price-range").slider({
     range: true,
     min: minimum,
     max: maximum,
     values: [ minimum, maximum ],
-    slide: function( event, ui ) {
-      $( "#price-amount-1" ).val( ui.values[ 0 ] + "円" );
-      $( "#price-amount-2" ).val( ui.values[ 1 ] + "円" );
+    slide: function(event, ui) {
+      $("#price-amount-1").val(ui.values[ 0 ] + "円");
+      $("#price-amount-2").val(ui.values[ 1 ] + "円");
     }
   });
 
-  $( "#price-amount-1" ).val( $( "#price-range" ) .slider( "values", 0 ) + "円");
-  $( "#price-amount-2" ).val( $( "#price-range" ) .slider( "values", 1 ) + "円");
+  $("#price-amount-1").val($("#price-range") .slider("values", 0) + "円");
+  $("#price-amount-2").val($("#price-range") .slider("values", 1) + "円");
 });
 //============================== PRODUCT SINGLE SLIDER =========================
 jQuery(document).ready(function() {
