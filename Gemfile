@@ -20,6 +20,7 @@ gem 'dotenv-rails'
 gem 'solidus', '~> 2.9.0'
 gem 'solidus_auth_devise'
 gem 'solidus_i18n', github: 'solidusio-contrib/solidus_i18n', branch: 'master'
+gem 'httpclient'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -30,11 +31,12 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rails-erd'
   gem 'annotate'
-  gem 'rubocop'
+  gem 'rubocop-airbnb'
   gem 'capybara', '~> 2.15.2'
   gem 'launchy', '~>2.4.3'
   gem 'webdrivers'
   gem 'rails-controller-testing'
+  gem 'webmock'
 end
 
 group :development do

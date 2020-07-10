@@ -2,7 +2,6 @@ require 'rails_helper'
 
 include ApplicationHelper
 RSpec.describe ApplicationHelper, type: :helper do
-
   describe 'ページタイトル' do
     context '@product.nameが空白の場合' do
       it 'base_titleだけが表示される' do

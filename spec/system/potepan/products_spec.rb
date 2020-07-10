@@ -1,6 +1,5 @@
 require 'rails_helper'
 RSpec.describe 'Potepan::Products', type: :system do
-
   let(:taxonomy) { create(:taxonomy) }
   let(:taxon) { create(:taxon, taxonomy: taxonomy) }
   let(:product) { create(:product, taxons: [taxon]) }
@@ -20,7 +19,7 @@ RSpec.describe 'Potepan::Products', type: :system do
     end
     within(:css, '.productCaption') do
       expect(page).to have_content related_product.name
-      expect(page).to_not have_content notrelated_product.name
+      expect(page).not_to have_content notrelated_product.name
     end
   end
 

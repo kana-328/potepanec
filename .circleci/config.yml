@@ -81,6 +81,8 @@ jobs:
             heroku config:set AMAZON_S3_HOST_NAME=$AMAZON_S3_HOST_NAME
             heroku config:set AMAZON_S3_REGION=$AMAZON_S3_REGION
             heroku config:set AMAZON_S3_BUCKET_NAME=$AMAZON_S3_BUCKET_NAME
+            heroku config:set API_SUGGEST_URL=$API_SUGGEST_URL
+            heroku config:set API_KEY=$API_KEY
             heroku run bin/rails db:migrate
             heroku run bin/rails runner "['products', 'taxons', 'option_values', 'product_option_types', 'product_properties', 'variants', 'assets'].each { |table| Spree::Sample.load_sample(table) }"
             heroku run bin/rails runner db/seeds/potepan_suggest.rb
